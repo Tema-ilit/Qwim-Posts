@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "nuxt dev",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d .nuxt/dist",
+    "deploy": "gh-pages -d .nuxt/dist/client",
     "build": "nuxt build",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
