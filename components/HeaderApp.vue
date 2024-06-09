@@ -8,12 +8,12 @@
       <div class="flex items-center gap-24">
         <nav class="flex items-center gap-14 list-none">
           <li
-            class="transition ease-in-out duration-300 z-20 hover:-translate-y-1.5 hover:text-slate-400"
+            class="transition ease-in-out duration-300 hover:-translate-y-1.5 hover:text-slate-400"
           >
             <NuxtLink to="/works">Works</NuxtLink>
           </li>
           <li
-            class="transition ease-in-out duration-300 z-20 hover:-translate-y-1.5 hover:text-slate-400"
+            class="transition ease-in-out duration-300 hover:-translate-y-1.5 hover:text-slate-400"
           >
             <NuxtLink to="/about">About</NuxtLink>
           </li>

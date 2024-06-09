@@ -1,11 +1,7 @@
 <script setup lang="ts">
 const store = usePostStore();
-
-// const totalPage = computed(() => {
-//   return Math.ceil(store.post?.length! / 8);
-// });
-
-const page = ref(0);
+const page = ref<number>(0);
+const showId = ref(0);
 
 onMounted(async () => {
   await store.getposts();
@@ -13,8 +9,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="container m-auto">
-    <div class="px-28 pt-28 pb-36">
+  <div>
+    <div
+      class="container m-auto xl:px-28 xl:pt-32 xl:pb-32 lg:px-20 lg:pt-24 lg:pb-24 md:px-14 md:pt-16 md:pb-16 sm:px-8 sm:pt-10 sm:pb-10"
+    >
       <h1 class="text-black text-[84px] leading-[84px] font-normal mb-14">
         Articles
       </h1>
@@ -23,12 +21,22 @@ onMounted(async () => {
         <div
           v-for="item in store.posts.slice(page * 8, page * 8 + 8)"
           :key="item.id"
+          class="relative flex flex-col items-start transition ease-in-out duration-300 hover:-translate-y-4"
+          @mouseenter="showId = item.id"
+          @mouseleave="showId = 0"
         >
-          <NuxtLink :to="{ name: 'posts-id', params: { id: item.id } }">
-            <img src="/img/default1.jpg" alt="Image" class="mb-6" />
-            <p class="mb-3">{{ item.preview }}</p>
-            <button>Read more</button>
-          </NuxtLink>
+          <img src="/img/default1.jpg" alt="Image" class="mb-6" />
+          <p class="mb-3">{{ item.preview }}</p>
+
+          <transition name="fade">
+            <NuxtLink
+              v-if="item.id === showId"
+              :to="{ name: 'posts-id', params: { id: item.id } }"
+              class="absolute z-10 left-0 -bottom-6 text-xl font-normal leading-7 text-[#7941A7] transition ease-in-out duration-300 hover:text-[#E2BEFF] m-0"
+            >
+              Read more
+            </NuxtLink>
+          </transition>
         </div>
       </div>
 
@@ -36,3 +44,15 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>
